@@ -8,6 +8,8 @@
   "dependencies": {
     "generate-key": "latest",
     "express": "latest",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "webrtc.io": "latest",
+    "ws": "latest"
   }
 }

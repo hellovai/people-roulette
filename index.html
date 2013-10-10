@@ -4,19 +4,29 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 		<script src="/socket_front.js"></script>
-		<script src="http://simplewebrtc.com/latest.js"></script>
-		<script>
-		var webrtc = new SimpleWebRTC({
-		    localVideoEl: 'localVideo',
-		    remoteVideosEl: 'remotesVideos',
-		    autoRequestMedia: true
-		});
-		var roomFlag = false;
-		webrtc.on('readyToCall', function () {
-			roomFlag = true;
-    		webrtc.joinRoom('lulz');
-		});
-		</script>
+
+		<video id="local" autoplay="autoplay"></video>
+<video id="remote" autoplay="autoplay"></video>
+
+<script src="/webrtc.io.js"></script>
+<script>
+
+  // note: make sure hostname available to all connecting clients
+  // (ie. probably not `localhost`)
+  rtc.connect('ws://97.77.50.140:8001');
+
+  rtc.createStream({"video": true, "audio":false}, function(stream){
+    // get local stream for manipulation
+    rtc.attachStream(stream, 'local');
+  });
+
+  rtc.on('add remote stream', function(stream){
+    // show the remote video
+    rtc.attachStream(stream, 'remote');
+  });
+
+  // more rtc callbacks are available
+</script>
 	</head>
 	<body>
 		<div style="float:right">

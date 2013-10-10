@@ -2,7 +2,8 @@ var express = require('express')
   , app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
-  , rand = require("generate-key");
+  , rand = require("generate-key"),
+  webRTC = require('webrtc.io').listen(8001);
 
 app.use(express.static(__dirname + '/public'));
 server.listen(8080);
