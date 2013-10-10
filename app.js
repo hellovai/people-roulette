@@ -1,11 +1,11 @@
-var app = require('express')()
+var express = require('express')
+  , app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
   , rand = require("generate-key");
 
-// app.use('/static', express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/public'));
 server.listen(8080);
-
 // routing
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
@@ -31,18 +31,14 @@ io.sockets.on('connection', function (socket) {
         partner.room = room;
         socket.join(room);
         partner.join(room);
-        partner.emit('updatechat', 'SERVER', 'found you a friend! ' + socket.id);
-        socket.emit('updatechat', 'SERVER', 'found you a friend! ' + partner.id);
+        partner.emit('match', room);
+        socket.emit('match', room);
       } else {
         partner.emit('rejoin');
         socket.emit('rejoin');
       }
     }
   });
-
-  // socket.on('leave' function() {
-  //   io.socket.in()
-  // });
 
   socket.on('disconnect', function() {
     console.log(Object.keys(users));
