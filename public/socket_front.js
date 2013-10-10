@@ -7,7 +7,7 @@ socket.on('connect', function(){
 
 socket.on('match', function (room) {
 	if(roomFlag) {
-		webrtc.joinRoom(room);
+		// webrtc.joinRoom(room);
 	}
 	$('#conversation').html("");
 	$('#conversation').append('Found a friend! <br />');

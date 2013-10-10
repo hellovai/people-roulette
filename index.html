@@ -14,12 +14,13 @@
 		var roomFlag = false;
 		webrtc.on('readyToCall', function () {
 			roomFlag = true;
+    		webrtc.joinRoom('lulz');
 		});
 		</script>
 	</head>
 	<body>
-		<div style="right">
-			<video height="300" id="localVideo"></div>
+		<div style="float:right">
+			<video height="30" id="localVideo"></div>
         	<div id="remotesVideos"></div>
         <div>
 		<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
