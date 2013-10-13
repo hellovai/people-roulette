@@ -6,7 +6,7 @@ socket.on('connect', function(){
 });
 
 socket.on('match', function (room) {
-	$("#leavejoin").html('leave');
+	$("#leavejoin").attr('value','leave');
 	$('#conversation').html("");
 	$('#conversation').append('<em>Found a friend!</em><br />');
 	roomJoiner(room);
