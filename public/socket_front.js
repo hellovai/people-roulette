@@ -8,6 +8,7 @@ socket.on('connect', function(){
 socket.on('match', function (room) {
 	$('#conversation').html("");
 	$('#conversation').append('Found a friend! <br />');
+	roomJoiner(room);
 });
 function roomJoiner(room) {
 	console.log("Attempting to join: " + room);
