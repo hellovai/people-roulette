@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://ec2-54-200-40-68.us-west-2.compute.amazonaws.com:8080');
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
@@ -7,7 +7,7 @@ socket.on('connect', function(){
 
 socket.on('match', function (room) {
 	$('#conversation').html("");
-	$('#conversation').append('Found a friend! <br />');
+	$('#conversation').append('<em>Found a friend!</em><br />');
 	roomJoiner(room);
 });
 function roomJoiner(room) {
@@ -20,12 +20,18 @@ function roomJoiner(room) {
 	}
 }
 // listener, whenever the server emits 'updatechat', this updates the chat body
-socket.on('updatechat', function (username, data) {
-	$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+socket.on('updatechat', function (flag, data) {
+	var sender = "Partner"
+	if(flag) sender = "You"
+	$('#conversation').append('<b>'+ sender + ':</b> ' + data + '<br>');
+});
+
+socket.on('notify', function (data) {
+	$('#conversation').append('<em>' + data + '</em><br>');
 });
 
 socket.on('rejoin', function () {
-	$('#conversation').append('<b>SERVER</b> your friend hates you<br>');
+	$('#conversation').append('<em>Partner has left!</em><br />');
 	socket.emit('join');
 });
 

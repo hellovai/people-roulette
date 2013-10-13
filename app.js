@@ -21,7 +21,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function () {
     if(Object.keys(users).length == 0) {
       users.push(socket);
-      socket.emit('updatechat', 'SERVER', 'Waiting on a friend ' + socket.id);
+      socket.emit('notify', 'Waiting on a partner');
     } else {
       console.log('Finding partnet for: ' + socket.id);
       partner = users.pop();
@@ -61,12 +61,10 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('sendchat', function (data) {
     if(socket.room) {
-      socket.broadcast.to(socket.room).emit('updatechat', 'stranger', data);
-      socket.emit('updatechat', 'you', data);
+      socket.broadcast.to(socket.room).emit('updatechat', false, data);
       // io.sockets.in(socket.room).emit('updatechat', socket.id, data);
-    } else {
-      socket.emit('updatechat', 'you', data);
     }
+    socket.emit('updatechat', true, data);
   });
 
 });

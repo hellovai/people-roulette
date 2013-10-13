@@ -21,32 +21,14 @@
   // (ie. probably not `localhost`)
   var roomFlag = false;
   var webrtc = new SimpleWebRTC({
-                // the id/element dom element that will hold "our" video
-                localVideoEl: 'localVideo',
-                // the id/element dom element that will hold remote videos
-                remoteVideosEl: 'remotes',
-                // immediately ask for camera access
-                autoRequestMedia: true,
-                log: true
-            });
+                    localVideoEl: 'localVideo',
+                    remoteVideosEl: 'remotes',
+                    autoRequestMedia: true,
+                    log: true
+                  });
   webrtc.on('readyToCall', function () {
-                // you can name it anything
-                roomFlag = true;
-                // if (roomFlag) webrtc.joinRoom(roomFlag);
-   });
-  // rtc.connect('ws://localhost:8001');
-
-  // rtc.createStream({"video": true, "audio":false}, function(stream){
-  //   // get local stream for manipulation
-  //   rtc.attachStream(stream, 'local');
-  // });
-
-  // rtc.on('add remote stream', function(stream){
-  //   // show the remote video
-  //   rtc.attachStream(stream, 'remote');
-  // });
-
-  // more rtc callbacks are available
+    roomFlag = true;
+  });
 </script>
 	</head>
 	<body>
