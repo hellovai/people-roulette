@@ -8,12 +8,15 @@ socket.on('connect', function(){
 socket.on('match', function (room) {
 	$('#conversation').html("");
 	$('#conversation').append('Found a friend! <br />');
+	roomJoiner(room);
 });
 function roomJoiner(room) {
+	console.log("Attempting to join: " + room);
 	if(roomFlag) {
 		webrtc.joinRoom(room);
 	} else {
-		roomJoiner(room);
+		console.log("Not yet ready to join");
+		setTimeout(function() { roomJoiner(room); }, 1000);
 	}
 }
 // listener, whenever the server emits 'updatechat', this updates the chat body
