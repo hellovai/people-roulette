@@ -25,6 +25,7 @@ socket.on('updatechat', function (flag, data) {
 	var sender = "Partner";
 	if(flag) sender = "You";
 	$('#conversation').append('<b>'+ sender + ':</b> ' + data + '<br>');
+	$("#conversation").scrollTop($("#conversation")[0].scrollHeight);
 });
 
 socket.on('notify', function (data) {
