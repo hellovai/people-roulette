@@ -65,7 +65,7 @@ io.sockets.on('connection', function (socket) {
       socket.emit('updatechat', 'you', data);
       // io.sockets.in(socket.room).emit('updatechat', socket.id, data);
     } else {
-      socket.emit('updatechat', socket.id, data);
+      socket.emit('updatechat', 'you', data);
     }
   });
 
