@@ -32,6 +32,7 @@ socket.on('notify', function (data) {
 });
 
 socket.on('rejoin', function () {
+	webrtc.leaveRoom(webrtc.roomName);
 	$('#conversation').append('<em>Partner has left!</em><br />');
 	socket.emit('join');
 });
