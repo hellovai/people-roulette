@@ -7,7 +7,7 @@ socket.on('connect', function(){
 
 socket.on('match', function (room) {
 	$('#conversation').html("");
-	$('#conversation').append('Found a friend! <br />');
+	$('#conversation').append('<em>Found a friend!</em><br />');
 	roomJoiner(room);
 });
 function roomJoiner(room) {
@@ -31,7 +31,7 @@ socket.on('notify', function (data) {
 });
 
 socket.on('rejoin', function () {
-	$('#conversation').append('Partner has left!');
+	$('#conversation').append('<em>Partner has left!</em>');
 	socket.emit('join');
 });
 
