@@ -6,6 +6,7 @@ socket.on('connect', function(){
 });
 
 socket.on('match', function (room) {
+	$("#leavejoin").html('leave');
 	$('#conversation').html("");
 	$('#conversation').append('<em>Found a friend!</em><br />');
 	roomJoiner(room);
@@ -47,6 +48,20 @@ $(function(){
 		$('#data').val('');
 		// tell server to execute 'sendchat' and send along one parameter
 		socket.emit('sendchat', message);
+	});
+
+	//when the client clicks leave
+	$('#leavejoin').click( function() {
+
+		$('#conversation').append('<em>Left the room!</em><br />');
+		if($(this).attr("value") == "leave") {
+			socket.emit('leave');
+			webrtc.leaveRoom(webrtc.room);
+			$("#leavejoin").html('join');
+		} else {
+			socket.emit('join');
+			$("#leavejoin").html('joining');
+		}
 	});
 
 	// when the client hits ENTER on their keyboard

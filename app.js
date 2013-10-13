@@ -41,8 +41,19 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  socket.on('leave', function() {
+    if(socket.room) {
+      room = socket.room;
+      socket.leave(room);
+      partner = io.sockets.clients(room)[0];
+      if(partner) {
+        partner.leave(room);
+        partner.emit('rejoin');
+      }
+    }
+  });
+
   socket.on('disconnect', function() {
-    console.log(Object.keys(users));
     if(socket.room) {
       room = socket.room;
       socket.leave(room);
