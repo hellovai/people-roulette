@@ -13,7 +13,7 @@ function roomJoiner(room) {
 	if(roomFlag) {
 		webrtc.joinRoom(room);
 	} else {
-		roomJoiner(room);
+		setTimeout(function() { roomJoiner(room); }, 1000);
 	}
 }
 // listener, whenever the server emits 'updatechat', this updates the chat body
