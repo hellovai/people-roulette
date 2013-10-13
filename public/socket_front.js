@@ -31,7 +31,7 @@ socket.on('notify', function (data) {
 });
 
 socket.on('rejoin', function () {
-	$('#conversation').append('<em>Partner has left!</em>');
+	$('#conversation').append('<em>Partner has left!</em><br />');
 	socket.emit('join');
 });
 
