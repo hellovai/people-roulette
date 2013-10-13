@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://192.168.0.7:8080');
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
@@ -6,11 +6,13 @@ socket.on('connect', function(){
 });
 
 socket.on('match', function (room) {
-	if(roomFlag) {
-		// webrtc.joinRoom(room);
-	}
 	$('#conversation').html("");
 	$('#conversation').append('Found a friend! <br />');
+	if(roomFlag) {
+		webrtc.joinRoom(room);
+	} else {
+		$('#conversation').append('Your video is not ready! <br />');
+	}
 });
 
 // listener, whenever the server emits 'updatechat', this updates the chat body

@@ -6,32 +6,45 @@
 		<script src="/socket_front.js"></script>
 
 <script src="/webrtc.io.js"></script>
+<script src="http://simplewebrtc.com/latest.js"></script>
 <script>
-
   // note: make sure hostname available to all connecting clients
   // (ie. probably not `localhost`)
-  rtc.connect('ws://localhost:8001');
+  var roomFlag = false;
+  var webrtc = new SimpleWebRTC({
+                // the id/element dom element that will hold "our" video
+                localVideoEl: 'localVideo',
+                // the id/element dom element that will hold remote videos
+                remoteVideosEl: 'remotes',
+                // immediately ask for camera access
+                autoRequestMedia: true,
+                log: true
+            });
+  webrtc.on('readyToCall', function () {
+                // you can name it anything
+                roomFlag = true;
+                // if (roomFlag) webrtc.joinRoom(roomFlag);
+   });
+  // rtc.connect('ws://localhost:8001');
 
-  rtc.createStream({"video": true, "audio":false}, function(stream){
-    // get local stream for manipulation
-    rtc.attachStream(stream, 'local');
-  });
+  // rtc.createStream({"video": true, "audio":false}, function(stream){
+  //   // get local stream for manipulation
+  //   rtc.attachStream(stream, 'local');
+  // });
 
-  rtc.on('add remote stream', function(stream){
-    // show the remote video
-    rtc.attachStream(stream, 'remote');
-  });
+  // rtc.on('add remote stream', function(stream){
+  //   // show the remote video
+  //   rtc.attachStream(stream, 'remote');
+  // });
 
   // more rtc callbacks are available
 </script>
 	</head>
 	<body>
 		<div style="float:right">
-			<video id="local" autoplay="autoplay"></video>
-			<video id="remote" autoplay="autoplay"></video>
-			<video height="30" id="localVideo"></div>
-        	<div id="remotesVideos"></div>
-        <div>
+      <video id="localVideo"></video>
+      <div id="remotes"></div>
+    </div>
 		<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
 			<div id="conversation"></div>
 			<input id="data" style="width:200px;" />
