@@ -10,9 +10,11 @@ socket.on('match', function (room) {
 	$('#conversation').append('Found a friend! <br />');
 });
 function roomJoiner(room) {
+	console.log("Attempting to join: " + room);
 	if(roomFlag) {
 		webrtc.joinRoom(room);
 	} else {
+		console.log("Not yet ready to join");
 		setTimeout(function() { roomJoiner(room); }, 1000);
 	}
 }
