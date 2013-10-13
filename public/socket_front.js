@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://ec2-54-200-40-68.us-west-2.compute.amazonaws.com:8080');
 
 
 function roomJoiner(room, delay) {
