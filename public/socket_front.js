@@ -22,8 +22,8 @@ function roomJoiner(room) {
 }
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (flag, data) {
-	var sender = "Partner"
-	if(flag) sender = "You"
+	var sender = "Partner";
+	if(flag) sender = "You";
 	$('#conversation').append('<b>'+ sender + ':</b> ' + data + '<br>');
 });
 
@@ -50,6 +50,7 @@ $(function(){
 		$('#data').val('');
 		// tell server to execute 'sendchat' and send along one parameter
 		socket.emit('sendchat', message);
+		$("#conversation").focus();
 	});
 
 	//when the client clicks leave
