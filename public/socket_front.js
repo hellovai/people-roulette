@@ -49,8 +49,9 @@ $(function(){
 		var message = $('#data').val();
 		$('#data').val('');
 		// tell server to execute 'sendchat' and send along one parameter
-		if(length(message) > 0 )
+		if(message.length > 0 ) {
 			socket.emit('sendchat', message);
+		}
 		$("#data").focus();
 	});
 
