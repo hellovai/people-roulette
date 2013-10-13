@@ -10,6 +10,6 @@
     "express": "latest",
     "socket.io": "latest",
     "socket.io-client": "latest",
-    "webrtc.io": "latest"
+    "node-uuid": "latest"
   }
 }
