@@ -35,6 +35,7 @@ socket.on('rejoin', function () {
 	webrtc.leaveRoom(webrtc.roomName);
 	$('#conversation').append('<em>Partner has left!</em><br />');
 	socket.emit('join');
+	$("#leavejoin").attr('value', 'joining');
 });
 
 socket.on('webchat', function(data) {
@@ -58,10 +59,10 @@ $(function(){
 		if($(this).attr("value") == "leave") {
 			socket.emit('leave');
 			webrtc.leaveRoom(webrtc.room);
-			$("#leavejoin").html('join');
-		} else {
+			$(this).attr('value', 'join');
+		} else ($(this).attr("value") == "join"){
 			socket.emit('join');
-			$("#leavejoin").html('joining');
+			$(this).attr('value', 'joining');
 		}
 	});
 
