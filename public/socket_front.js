@@ -50,7 +50,7 @@ $(function(){
 		$('#data').val('');
 		// tell server to execute 'sendchat' and send along one parameter
 		socket.emit('sendchat', message);
-		$("#conversation").focus();
+		$("#data").focus();
 	});
 
 	//when the client clicks leave
