@@ -1,4 +1,4 @@
-var socket = io.connect('http://ec2-54-200-40-68.us-west-2.compute.amazonaws.com:8080');
+var socket = io.connect('http://localhost:8080');
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){

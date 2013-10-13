@@ -61,9 +61,11 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('sendchat', function (data) {
     if(socket.room) {
-      io.sockets.in(socket.room).emit('updatechat', socket.id, data);
+      socket.broadcast.to(socket.room).emit('updatechat', 'stranger', data);
+      socket.emit('updatechat', 'you', data);
+      // io.sockets.in(socket.room).emit('updatechat', socket.id, data);
     } else {
-      socket.emit('updatechat', socket.id, data);
+      socket.emit('updatechat', 'you', data);
     }
   });
 
