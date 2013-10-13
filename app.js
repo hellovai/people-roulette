@@ -21,7 +21,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function () {
     if(Object.keys(users).length == 0) {
       users.push(socket);
-      socket.emit('updatechat', 'SERVER', 'Waiting on a friend ' + socket.id);
+      socket.emit('updatechat', 'Waiting on a partner');
     } else {
       console.log('Finding partnet for: ' + socket.id);
       partner = users.pop();

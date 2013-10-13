@@ -25,7 +25,7 @@ socket.on('updatechat', function (username, data) {
 });
 
 socket.on('rejoin', function () {
-	$('#conversation').append('<b>SERVER</b> your friend hates you<br>');
+	$('#conversation').append('Partner has left!');
 	socket.emit('join');
 });
 
