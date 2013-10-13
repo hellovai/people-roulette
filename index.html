@@ -15,19 +15,30 @@
                 height: 240px;
                 width: 320px;
             }
-            
+            .message {
+
+            }
+            .self.action {
+                color: blue;
+            }
+            .other.action {
+                color: red;
+            }
+            .alert {
+                font-style:italic;
+            }
       </style>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 		<script src="/socket_front.js"></script>
 
-<script src="/webrtc.io.js"></script>
 <script src="http://simplewebrtc.com/latest.js"></script>
 <script>
   // note: make sure hostname available to all connecting clients
   // (ie. probably not `localhost`)
   var roomFlag = false;
   var webrtc = new SimpleWebRTC({
+                    url: "http://ec2-54-200-40-68.us-west-2.compute.amazonaws.com:8888/",
                     localVideoEl: 'localVideo',
                     remoteVideosEl: 'remotes',
                     autoRequestMedia: true,

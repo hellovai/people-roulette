@@ -1,5 +1,25 @@
 var socket = io.connect('http://ec2-54-200-40-68.us-west-2.compute.amazonaws.com:8080');
 
+
+function roomJoiner(room, delay) {
+	console.log("Attempt " + delay + " to join: " + room);
+	if(roomFlag) {
+		webrtc.joinRoom(room);
+	} else {
+		if (delay > Math.pow(2, 10) ) {
+			console.log("Failed to join");
+			return;
+		}
+		console.log("Not yet ready to join");
+		setTimeout(function() { roomJoiner(room, delay * 2); }, delay * 10);
+	}
+}
+
+function writeMessage (message, classes) {
+	$("#conversation").append( "<font class=\"message " + classes + " \">" + message + "</font><br />");
+	$("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+}
+
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
 	socket.emit('join');
@@ -8,33 +28,23 @@ socket.on('connect', function(){
 socket.on('match', function (room) {
 	$("#leavejoin").attr('value','leave');
 	$('#conversation').html("");
-	$('#conversation').append('<em>Found a friend!</em><br />');
-	roomJoiner(room);
+	writeMessage("Found a friend!", "alert");
+	roomJoiner(room, 1);
 });
-function roomJoiner(room) {
-	console.log("Attempting to join: " + room);
-	if(roomFlag) {
-		webrtc.joinRoom(room);
-	} else {
-		console.log("Not yet ready to join");
-		setTimeout(function() { roomJoiner(room); }, 1000);
-	}
-}
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (flag, data) {
-	var sender = "Partner";
-	if(flag) sender = "You";
-	$('#conversation').append('<b>'+ sender + ':</b> ' + data + '<br>');
-	$("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+	var sender = "other";
+	if(flag) sender = "self";
+	writeMessage(data, sender);
 });
 
 socket.on('notify', function (data) {
-	$('#conversation').append('<em>' + data + '</em><br>');
+	writeMessage(data, "alert");
 });
 
 socket.on('rejoin', function () {
 	webrtc.leaveRoom(webrtc.roomName);
-	$('#conversation').append('<em>Partner has left!</em><br />');
+	writeMessage("Partner has left!", "alert");
 	socket.emit('join');
 	$("#leavejoin").attr('value', 'joining');
 });
