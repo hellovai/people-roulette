@@ -15,6 +15,7 @@
                 height: 240px;
                 width: 320px;
             }
+            
       </style>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
@@ -38,15 +39,21 @@
 </script>
 	</head>
 	<body>
-		<div style="float:left;width:30%">
+		<div style="float:left;width:30%;margin:0">
       <div id="locals"><video id="localVideo"></video></div>
       <div id="remotes"></div>
     </div>
-		<div style="width:70%;overflow:scroll-y;padding:10px;">
+<!-- 		<div style="width:70%;overflow:scroll-y;padding:10px;">
 			<div id="conversation" style="height:450px;width:50%;overflow:scroll-y"></div>
       <input type="button" id="leavejoin" value="leave" style="width:5%;" />
 			<input id="data" style="width:40%;" />
 			<input type="button" id="datasend" value="send" style="width:5%;" />
-		</div>
+		</div> -->
+    <div style="width:68%;float:right;overflow:scroll-y;padding:10px;border:1px solid #666;border-radius:4px">
+      <div id="conversation" style="height:450px;overflow:scroll-y"></div>
+      <input type="button" id="leavejoin" value="leave" style="width:5%;" />
+      <input id="data" style="width:85%;" />
+      <input type="button" id="datasend" value="send" style="width:5%;" />
+    </div>
 	</body>
 </html>
