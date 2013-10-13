@@ -60,7 +60,7 @@ $(function(){
 			socket.emit('leave');
 			webrtc.leaveRoom(webrtc.room);
 			$(this).attr('value', 'join');
-		} else ($(this).attr("value") == "join"){
+		} else if ($(this).attr("value") == "join"){
 			socket.emit('join');
 			$(this).attr('value', 'joining');
 		}
